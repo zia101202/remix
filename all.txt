@@ -1,0 +1,189 @@
+pragma solidity 20.4.0;
+
+contract Greeter {
+/* Define variable greeting of the type string */
+string public yourName;;
+
+/* This runs when the contract is executed */
+function Greeter() public {
+
+yourName = "World";
+}
+
+function set(string name)public {
+yourName = name;
+}
+
+function hello() constant returns (string) {
+return yourName;
+
+}
+}
+
+----------------------------------------------------------------------------------------------
+pragma solidity 20.4.0;
+
+uint storedData;
+
+function set(uint x) public {
+storedData = x;
+
+}
+
+function get() constant public returns (uint) {
+return storedData;
+
+}
+
+function increment (uint n) public {
+storedData = storedData + n;
+
+}
+
+function decrement (uint n) public {
+storedData = storedData - n;
+
+}
+
+}
+-------------------------------------------------------------
+
+pragma solidity "0.4.0;
+contract Bidder {
+
+string public name - “Buffalo”;
+uint public bidAmount;
+
+bool public eligible;
+
+uint constant minBid = 1000;
+
+function sethame(string nm) public {
+name = nm;
+
+}
+
+function setBidAmount(uint x) public {
+bidamount = x;
+}
+
+function determineEligibility() public {
+if (bidAmount >- winBid ) eligible = true;
+else eligible = false;
+
+}
+function mint(address receiver, uint amount) public ({
+if (msg.sender !- minter) return;
+balances[receiver] += amount;
+
+}
+
+function send(address receiver, uint amount) public {
+if (balances[msg.sender] < amount) return;
+balances[msg.sender] -= amount;
+balances[receiver] += amount;
+Sent (msg.sender, receiver, amount);
+-----------------------------------------------------------------------------
+ pragma solidity "0.4.0;
+ contract Ballot {
+
+
+ struct Voter {
+
+ uint weight;
+
+ bool vot
+
+ uints vote;
+
+// address delegate;
+
+ }
+
+ struct Proposal {
+
+ uint voteCount; // could add other data about proposal
+
+
+
+
+ address chairperson;
+ mapping(address => Voter) voters;
+
+ Proposal[] proposals;
+
+
+
+
+
+ /// Create a new ballot with $(_numProposals) different proposals.
+ function Ballot(uint8 _numProposals) public {
+ chairperson = msg.sender;
+
+ voters[chairperson].weight = 2;
+
+ proposals.length « numProposals;
+
+
+ }
+
+
+/// Give $(tovoter) the right to vote on this ballot.
+
+/// may only be called by $(chairperson).
+
+function register(address tovoter) public {
+if (msg.sender |= chairperson || voters[tovoter].voted) return;
+voters[tovoter)].weight = 1;
+voters[tovoter].voted = false;
+
+}
+
+/// Give a single vote to proposal $(toProposal).
+function vote(uint8 toProposal) public {
+Voter storage sender - voters[msg.sender];
+if (sender.voted || toProposal >- proposals.length) return;
+sender.voted ~ true;
+sender.vote - toProposal;
+proposals[toProposal].voteCount ++ sender.weight;
+
+------------------------------------------------------------------------------------
+
+pragma solidity "0.4.0;
+contract StateTransv2 (
+
+enum Stage {Init, Reg, Vote, Done}
+Stage public stage;
+
+uint startTime;
+
+uint public timeNow;
+
+function StateTransv2() public {
+stage = Stage.Init;
+startTime = now;
+
+}
+
+//Assuming the Stage change has to be enacted APPROX every 1 mintute
+//timeNow variable is defined for underatanding the process, you can simply use
+// "now" solidity defined varaible
+11 of course, time duration for the Stages may depend on your application
+//1 minutes is set to illustrate the working
+function advancestate () public {
+
+timeNow = now;
+
+if (timeNow > (startTime+ 10 seconds)) {
+
+startTime = timeNow;
+
+if (stage == Stage.Init) {stage = Stage.Reg; return;}
+
+if (stage =~ Stage.Reg) {stage = Stage.Vote; return;}
+
+if (stage =~ Stage.vote) {stage = Stage.Done; return;}
+
+return;
+
+}
